@@ -219,7 +219,7 @@ public class RAMItemMenu {
                         System.out.println("Quantity cannot be negative number");
                         quantity = Input.getInt("Enter again: ", oldItem.getQuantity());
                     }
-                    System.out.println("The new quantity is: " + quantity + (quantity > 1 ? " items" : "item"));
+                    System.out.println("The new quantity is: " + quantity + (quantity > 1 ? " items" : " item"));
 
                     /*Set data that user enter to update to oldItem*/
                     String newCode;

@@ -92,7 +92,7 @@ public class RAMItemController implements IItemController<RAMItem> {
     @Override
     public List<RAMItem> searchByType(String type) {
         List<RAMItem> data = new ArrayList<>();
-        Collections.sort(data, RAMItem.sortByType);
+//        Collections.sort(data, RAMItem.sortByCode);
         for (RAMItem item : this.list) {
             if (item.getType().equalsIgnoreCase(type) && item.isActive()) {
                 data.add(item);
@@ -109,7 +109,7 @@ public class RAMItemController implements IItemController<RAMItem> {
     @Override
     public List<RAMItem> searchByBus(int bus) {
         List<RAMItem> data = new ArrayList<>();
-        Collections.sort(data, RAMItem.sortByBus);
+//        Collections.sort(data, RAMItem.sortByBus);
         for (RAMItem item : this.list) {
             if (item.getBus() == bus && item.isActive()) {
                 data.add(item);
@@ -126,7 +126,7 @@ public class RAMItemController implements IItemController<RAMItem> {
     @Override
     public List<RAMItem> searchByBrand(String brand) {
         List<RAMItem> data = new ArrayList<>();
-        Collections.sort(data, RAMItem.sortByBrand);
+//        Collections.sort(data, RAMItem.sortByCode);
         for (RAMItem item : this.list) {
             if (item.getBrand().equalsIgnoreCase(brand) && item.isActive()) {
                 data.add(item);
