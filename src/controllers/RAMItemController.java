@@ -203,6 +203,7 @@ public class RAMItemController implements IItemController<RAMItem> {
             String quantityOfCode = item.getCode().split("_")[1];
             if (codeSplited.equals(codePattern)) {
                 count = Integer.parseInt(quantityOfCode) + 1;
+                break;
             }
         }
 
@@ -246,6 +247,7 @@ public class RAMItemController implements IItemController<RAMItem> {
     }
 
     @Override
+    //return true if item exists or return false if item does not exist.
     public boolean checkExistCode(String code) {
         return this.getItem(code) != null;
     }

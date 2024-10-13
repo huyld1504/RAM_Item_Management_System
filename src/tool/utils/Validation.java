@@ -30,6 +30,6 @@ public class Validation {
         String now = date.toGMTString();
         int validYear = Integer.parseInt(now.split("\\s+")[2]);
 
-        return modelYear <= validYear;
+        return modelYear < validYear;
     }
 }

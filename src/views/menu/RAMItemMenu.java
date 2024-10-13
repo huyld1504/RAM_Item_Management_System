@@ -49,8 +49,23 @@ public class RAMItemMenu {
 
     private boolean isValidProductionDate(String date) {
         int year = Integer.parseInt(date.split("/")[1]);
+        int month = Integer.parseInt(date.split("/")[0]);
 
-        return Validation.isValidModelYear(year);
+        String formatToday = FormatData.formatDate(new Date());
+        int todayYear = Integer.parseInt(formatToday.split("/")[1]);
+        int todayMonth = Integer.parseInt(formatToday.split("/")[0]);
+
+        if (Validation.isValidModelYear(year)) {
+            if (month <= 12) {
+                return true;
+            }
+        } else if (year == todayYear) {
+            if (month <= todayMonth) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private String autoGenerateNewCode(String type) {
@@ -97,10 +112,12 @@ public class RAMItemMenu {
                 }
 
                 /*Production date*/
-                System.out.println("If you don't enter the production month year, my system will set today in default.");
-                String productionMonthYear = Input.getString("Enter the production date (MM/yyyy): ", FormatData.formatDate(new Date()));
+                //Return the month and year today
+                String production_date = FormatData.formatDate(new Date());
+                System.out.println("If you don't enter the production month year, my system will set " + production_date);
+                String productionMonthYear = Input.getString("Enter the production date (MM/yyyy): ", production_date);
                 while (!isValidStringFormat(productionMonthYear, FORMAT_DATE) || !isValidProductionDate(productionMonthYear)) {
-                    System.out.println("Invalid format date (MM/yyyy)");
+                    System.out.println("Invalid format date (MM/yyyy) or The production date is " + production_date);
                     productionMonthYear = Input.getString("Enter again: ");
                 }
 
@@ -169,6 +186,8 @@ public class RAMItemMenu {
                 String codeItemSearch = Input.getString("Enter item code to update: ");
                 if (this.ramItemDAO.checkExistCode(codeItemSearch)) {
                     RAMItem oldItem = this.ramItemDAO.getItem(codeItemSearch);
+                    //Save old code before generate code
+                    String oldCode = oldItem.getCode();
 
                     System.out.println("The type before updating is: " + oldItem.getType());
                     String type = Input.getString("Enter new type: ", oldItem.getType()).toUpperCase();
@@ -203,18 +222,18 @@ public class RAMItemMenu {
                     System.out.println("The new quantity is: " + quantity + (quantity > 1 ? " items" : "item"));
 
                     /*Set data that user enter to update to oldItem*/
-                    String oldCode = oldItem.getCode();
+                    String newCode;
+                    RAMItem newItem;
                     if (!type.equalsIgnoreCase(oldItem.getType())) {
-                        String newCode = this.autoGenerateNewCode(type);
-                        oldItem.setCode(newCode);
+                        newCode = this.autoGenerateNewCode(type);
+                        newItem =new RAMItem(newCode, type, bus, brand, quantity, FormatData.formatDate(oldItem.getProductionMonthYear()));
+                    } else {
+                        newItem = new RAMItem(oldCode, type, bus, brand, quantity, FormatData.formatDate(oldItem.getProductionMonthYear()));
                     }
-                    oldItem.setType(type);
-                    oldItem.setBrand(brand);
-                    oldItem.setBus(bus);
-                    oldItem.setQuantity(quantity);
+                    
 
-                    boolean isUpdated = this.ramItemDAO.updateItem(oldCode, oldItem);
-                    if (!isUpdated) {
+                    boolean isUpdated = this.ramItemDAO.updateItem(oldCode, newItem);
+                    if (isUpdated) {
                         System.out.println("Updated successfully.");
                     } else {
                         System.out.println("Failed to update.");
@@ -283,6 +302,7 @@ public class RAMItemMenu {
             boolean flag = true;
             do {
                 System.out.println("=== RAM ITEM MANAGEMENT SYSTEM ===");
+//                System.out.println("Check existed CODE: " + this.ramItemDAO.checkExistCode("RAMLPDDR5_001"));
                 System.out.print("1. Add Item\n2. Search\n3. Update Item Information\n4. Delete Item\n5. Show All Items\n6. Store Data to File\n7. Quit Menu\n");
                 int choice = this.getChoice();
 
