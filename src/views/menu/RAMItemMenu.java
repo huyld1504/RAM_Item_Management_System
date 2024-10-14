@@ -48,9 +48,11 @@ public class RAMItemMenu {
     }
 
     private boolean isValidProductionDate(String date) {
+        //Split the date user enter
         int year = Integer.parseInt(date.split("/")[1]);
         int month = Integer.parseInt(date.split("/")[0]);
 
+        //Get the month, year in present
         String formatToday = FormatData.formatDate(new Date());
         int todayYear = Integer.parseInt(formatToday.split("/")[1]);
         int todayMonth = Integer.parseInt(formatToday.split("/")[0]);
