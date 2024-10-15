@@ -133,7 +133,7 @@ public class RAMItemController implements IItemController<RAMItem> {
             }
         }
 
-        if (data.isEmpty() || data == null) {
+        if (data.isEmpty()) {
             return Collections.EMPTY_LIST;
         } else {
             return data;
@@ -147,13 +147,16 @@ public class RAMItemController implements IItemController<RAMItem> {
             return;
         }
         Collections.sort(list, RAMItem.sortByCode);
-        System.out.printf("%-15s %-10s %-10s %-10s %-10s %-15s\n", "Code", "Type", "Bus Speed", "Brand", "Quantity", "Production Date");
+        System.out.println("__________________________________________________________________________________");
+        System.out.printf("|%-15s |%-10s |%-10s |%-10s |%-10s |%-15s|\n", "Code", "Type", "Bus Speed", "Brand", "Quantity", "Production Date");
         for (RAMItem item : this.list) {
             if (item.isActive()) {
-                String row = String.format("%-15s %-10s %-10s %-10s %-10d %-15s", item.getCode(), item.getType(), item.getBus() + "MHz", item.getBrand(), item.getQuantity(), FormatData.formatDate(item.getProductionMonthYear()));
+//                System.out.println("__________________________________________________________________________________");
+                String row = String.format("|%-15s |%-10s |%-10s |%-10s |%-10d |%-15s|", item.getCode(), item.getType(), item.getBus() + "MHz", item.getBrand(), item.getQuantity(), FormatData.formatDate(item.getProductionMonthYear()));
                 System.out.println(row);
             }
         }
+//        System.out.println("__________________________________________________________________________________");
     }
 
     @Override

@@ -7,7 +7,10 @@
             <file>file:/D:/FPT/FA24/LAB211/RamManagementSystem/src/views/menu/RAMItemMenu.java</file>
             <file>file:/D:/FPT/FA24/LAB211/RamManagementSystem/src/controllers/RAMItemController.java</file>
             <file>file:/D:/FPT/FA24/LAB211/RamManagementSystem/src/models/RAMItem.java</file>
+            <file>file:/D:/FPT/FA24/LAB211/RamManagementSystem/src/fileManager/FileManager.java</file>
             <file>file:/D:/FPT/FA24/LAB211/RamManagementSystem/src/tool/utils/Validation.java</file>
+            <file>file:/D:/FPT/FA24/LAB211/RamManagementSystem/src/fileManager/IFileManager.java</file>
+            <file>file:/D:/FPT/FA24/LAB211/RamManagementSystem/src/tool/utils/FormatData.java</file>
             <file>file:/D:/FPT/FA24/LAB211/RamManagementSystem/src/controllers/IItemController.java</file>
             <file>file:/D:/FPT/FA24/LAB211/RamManagementSystem/src/views/Main.java</file>
         </group>
