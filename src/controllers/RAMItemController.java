@@ -148,11 +148,15 @@ public class RAMItemController implements IItemController<RAMItem> {
         }
         Collections.sort(list, RAMItem.sortByCode);
         System.out.println("__________________________________________________________________________________");
-        System.out.printf("|%-15s |%-10s |%-10s |%-10s |%-10s |%-15s|\n", "Code", "Type", "Bus Speed", "Brand", "Quantity", "Production Date");
+        System.out.printf("|%-15s |%-10s |%-10s |%-10s |%-10s |%-15s|%s\n", "Code", "Type", "Bus Speed", "Brand", "Quantity", "Production Date", "Status");
         for (RAMItem item : this.list) {
             if (item.isActive()) {
+                String status = "";
+                if(item.getQuantity() > 5) {
+                    status = "out of stop";
+                }
 //                System.out.println("__________________________________________________________________________________");
-                String row = String.format("|%-15s |%-10s |%-10s |%-10s |%-10d |%-15s|", item.getCode(), item.getType(), item.getBus() + "MHz", item.getBrand(), item.getQuantity(), FormatData.formatDate(item.getProductionMonthYear()));
+                String row = String.format("|%-15s |%-10s |%-10s |%-10s |%-10d |%-15s|%s", item.getCode(), item.getType(), item.getBus() + "MHz", item.getBrand(), item.getQuantity(), FormatData.formatDate(item.getProductionMonthYear()), status);
                 System.out.println(row);
             }
         }
